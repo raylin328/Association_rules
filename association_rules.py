@@ -50,7 +50,7 @@ class association_rules(object):
             if freq_table[key] >= support:
                 itemset = itemset.union(set(key))
         
-
+        freq_table = {key:value for (key,value) in freq_table.items() if value >= support}
         k = 2
 
         while(itemset):
