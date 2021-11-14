@@ -169,7 +169,7 @@ def main():
     n = len(transactions) #number of transactions = 6
     print(f"number of transactions: {n}") 
 
-    d = association_rules(transactions) # initialize object so you can use the methods
+    d = association_rules({}) # initialize empty object so you can use the methods
 
     print("popular items:")
     popular_items = d.popular_items(transactions,support = 2)
