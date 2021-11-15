@@ -138,20 +138,20 @@ class association_rules(object):
                                 associations[(head, body,)] = confidence
                                 # tuple(head,body,) # do not use [(head,body)]
                                 # can also use float(confidence) to convert it to floating point
+        
+        associations = {k: v for k, v in sorted(associations.items(), key=lambda item: item[1], reverse=True)}
+        # sort by support and then by confidence
+        return associations
 
+    def display_rules(self,associations:dict):
         print("list of association rules: ")
         for rule in associations:
             head = rule[0]
             tail = rule[1]
-            confidence = associations[rule]
-            print(f"{head} -> {tuple(tail)} {str(confidence)} = {float(confidence)}", end = " ")
+            support = associations[rule][0]
+            confidence = associations[rule][1]
+            print(f"{head} -> {tail} support: {support} confidence: {str(confidence)} = {float(confidence)}", end = " ")
             print()
-        return associations
-
-    def __repr__(self) -> str:
-        return str(self.data)
-
-
 
 def main():
 
@@ -176,8 +176,8 @@ def main():
     print(popular_items)
     print("")
 
-    d.create_assocation_rules(popular_items, min_conf=0.6)
-    print()
+    a = d.create_assocation_rules(popular_items, min_conf=0.6)
+    d.display_rules(a)
 
     
 
